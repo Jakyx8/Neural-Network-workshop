@@ -1,0 +1,2 @@
+model_checkpoint_path: "snn"
+all_model_checkpoint_paths: "snn"
