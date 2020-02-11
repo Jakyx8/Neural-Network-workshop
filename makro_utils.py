@@ -1,6 +1,6 @@
 import struct as st
 import numpy as np
-
+import math
 
 def load_MNIST():
     #Load dataset and transform them into input vectors
@@ -49,7 +49,7 @@ def load_MNIST():
 
 def mini_batches(x_train, y_train, mini_batch_size):
     
-    m = x_train.shape[1]
+    m = x_train.shape[0]
     num_of_complete_mini_batches = math.floor(m/(mini_batch_size))
     mini_batches = []
     
@@ -67,17 +67,17 @@ def mini_batches(x_train, y_train, mini_batch_size):
 
 def mini_batches_x_only(x_train, mini_batch_size):
     
-    m = x_train.shape[1]
+    m = x_train.shape[0]
     num_of_complete_mini_batches = math.floor(m/(mini_batch_size))
     mini_batches = []
     
     for k in range(0, num_of_complete_mini_batches):
-        mini_batch_x = x_train[:, k * mini_batch_size : k * mini_batch_size + mini_batch_size]
+        mini_batch_x = x_train[k * mini_batch_size : k * mini_batch_size + mini_batch_size, :, :]
         mini_batch = (mini_batch_x)
         mini_batches.append(mini_batch)
    
     if m % mini_batch_size != 0:
-        mini_batch_x = train_x[:, num_of_complete_mini_batches * mini_batch_size : m]
+        mini_batch_x = x_train[num_of_complete_mini_batches * mini_batch_size : m, :, :]
         mini_batch = (mini_batch_x)
         mini_batches.append(mini_batch)
     
